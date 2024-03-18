@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "553854829931",
+    "project_id": "bostan-app-383f2",
+    "storage_bucket": "bostan-app-383f2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:553854829931:android:5aeb46ca0ec2816446b82e",
+        "android_client_info": {
+          "package_name": "com.example.flutter_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "553854829931-s5nehrjf08v755aiqrt9lmf8qh8k9f3e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flutter_app",
+            "certificate_hash": "82707a4db73292d1a56688850291ac1c0fec20cb"
+          }
+        },
+        {
+          "client_id": "553854829931-3h0ledp9kgklnt9im33u4hlh4bu73sim.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0UnqN-9s9FpbXq6R_TZ-FbhF2G8g81rs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "553854829931-3h0ledp9kgklnt9im33u4hlh4bu73sim.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
