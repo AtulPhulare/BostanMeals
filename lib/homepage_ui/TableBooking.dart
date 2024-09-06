@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'Main.dart';
+
+import 'HomePage.dart';
 void main() {
   runApp(MyApp());
 }
@@ -126,6 +127,7 @@ class _FormPageState extends State<FormPage> {
                             return 'Please Enter Name';
                           }
                           return null;
+                          return null;
                         },
                         onSaved: (String value){
                           name = value;
@@ -143,6 +145,7 @@ class _FormPageState extends State<FormPage> {
                           {
                             return 'Please Enter Your Address';
                           }
+                          return null;
                           return null;
                         },
                         style: TextStyle(
@@ -166,6 +169,7 @@ class _FormPageState extends State<FormPage> {
                             return 'Please enter phone no ';
                           }
                           return null;
+                          return null;
                         },
                         style: TextStyle(
                           color: Colors.white,
@@ -186,6 +190,7 @@ class _FormPageState extends State<FormPage> {
                           {
                             return 'Please a Enter Your Choice';
                           }
+                          return null;
                           return null;
                         },
                         style: TextStyle(
@@ -208,6 +213,7 @@ class _FormPageState extends State<FormPage> {
                             return 'Please Enter Number of Persons';
                           }
                           return null;
+                          return null;
                         },
                         style: TextStyle(
                           color: Colors.white,
@@ -221,26 +227,39 @@ class _FormPageState extends State<FormPage> {
                       width: 200,
                       height: 50,
                       // ignore: deprecated_member_use
-                      child: RaisedButton(
-                        color: Colors.redAccent,
-                        onPressed: (){
-                          if(_formkey.currentState.validate())
-                          {
-                            print("successful");
-                            Map <String,dynamic> data={"name":na.text,"address":add.text,"phone":no.text as int,"choice":ch.text,"persons":per.text as int};
-                            var firebaseUser =  FirebaseAuth.instance.currentUser;
-                            firestoreInstance.collection("Table_booking").doc(firebaseUser.uid).set(data);
-                            return;
-                          }else{
-                            print("UnSuccessfull");
-                          }
-                        },
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50.0),
-                            side: BorderSide(color: Colors.blue,width: 2)
-                        ),
-                        textColor:Colors.white,child: Text("Book Table"),
-                      ),
+                      child: ElevatedButton(
+  onPressed: () async {
+    if (_formkey.currentState?.validate() ?? false) {
+      print("successful");
+      Map<String, dynamic> data = {
+        "name": na.text,
+        "address": add.text,
+        "phone": int.tryParse(no.text) ?? 0, // Ensure phone number is an integer
+        "choice": ch.text,
+        "persons": int.tryParse(per.text) ?? 0 // Ensure number of persons is an integer
+      };
+
+      var firebaseUser = FirebaseAuth.instance.currentUser;
+      if (firebaseUser != null) {
+        await firestoreInstance.collection("Table_booking").doc(firebaseUser.uid).set(data);
+        // You might want to add navigation or a confirmation here
+      } else {
+        print("No user logged in");
+      }
+    } else {
+      print("Unsuccessful");
+    }
+  },
+  style: ElevatedButton.styleFrom(
+    foregroundColor: Colors.white, backgroundColor: Colors.redAccent, // Background color
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(50.0),
+      side: BorderSide(color: Colors.blue, width: 2),
+    ), // Text color
+  ),
+  child: Text("Book Table"),
+)
+
                     )
                   ],
                 ),

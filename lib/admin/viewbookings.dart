@@ -32,6 +32,7 @@ class Bookapp extends StatelessWidget {
                     trailing: Text('${data[index]['persons']}'),
                     isThreeLine: true,
                   );
+                  return null;
                 },
               );
             }//else

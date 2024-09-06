@@ -31,6 +31,7 @@ class CheckoutScreen extends StatelessWidget {
               onTap: (){
               },
             );
+            return null;
           },
           separatorBuilder: (context, index){
             return Divider();

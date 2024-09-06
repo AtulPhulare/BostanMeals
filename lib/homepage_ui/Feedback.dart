@@ -53,20 +53,31 @@ class _FeedbackState extends State<Feedback1> {
             Row(
               children: [
                 // ignore: deprecated_member_use
-                FlatButton(
-                  onPressed: () {
-                    Map <String,dynamic> data={"phone":phone.text,"comment":comment.text};
-                    var firebaseUser =  FirebaseAuth.instance.currentUser;
-                    firestoreInstance.collection("feedback").doc(firebaseUser.uid).set(data);
-                  },
-                  child: Text(
-                    "SUBMIT",
-                    style: TextStyle(
-                        color: Colors.blue, fontWeight: FontWeight.bold),
-                  ),
-                  color: Color(0xFFE5E5E5),
-                  padding: EdgeInsets.all(16.0),
-                ),
+                TextButton(
+  onPressed: () async {
+    Map<String, dynamic> data = {
+      "phone": phone.text,
+      "comment": comment.text
+    };
+
+    var firebaseUser = FirebaseAuth.instance.currentUser;
+    if (firebaseUser != null) {
+      await firestoreInstance.collection("feedback").doc(firebaseUser.uid).set(data);
+      // Optionally, you might want to show a confirmation or navigate
+    } else {
+      print("No user logged in");
+    }
+  },
+  style: TextButton.styleFrom(
+    foregroundColor: Colors.blue, backgroundColor: Color(0xFFE5E5E5), // Background color
+    padding: EdgeInsets.all(16.0), // Padding
+    textStyle: TextStyle(
+      fontWeight: FontWeight.bold,
+    ),
+  ),
+  child: Text("SUBMIT"),
+)
+
               ],
             )
           ],

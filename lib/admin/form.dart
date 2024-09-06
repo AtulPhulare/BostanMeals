@@ -108,6 +108,7 @@ class _FormPageState extends State<FormPage> {
                         return 'not a valid Email';
                       }
                       return null;
+                      return null;
                     },
                     onSaved: (String value){
                       email = value;
@@ -130,6 +131,7 @@ class _FormPageState extends State<FormPage> {
                         return "Password does not match";
                       }
                       return null;
+                      return null;
                     },
                   ),
                 ),
@@ -149,6 +151,7 @@ class _FormPageState extends State<FormPage> {
                         return "Password does not match";
                       }
                       return null;
+                      return null;
                     },
                   ),
                 ),
@@ -156,23 +159,28 @@ class _FormPageState extends State<FormPage> {
                   width: 200,
                   height: 50,
                   // ignore: deprecated_member_use
-                  child: RaisedButton(
-                    color: Colors.redAccent,
-                    onPressed: (){
-                      if(_formkey.currentState.validate())
-                      {
-                        print("successful");
-                        return  Navigator.push(context, MaterialPageRoute(builder: (context)=> AdminHome()));
-                      }else{
-                        print("UnSuccessfull");
-                      }
-                    },
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50.0),
-                        side: BorderSide(color: Colors.blue,width: 2)
-                    ),
-                    textColor:Colors.white,child: Text("Submit"),
-                  ),
+                  child: ElevatedButton(
+  style: ElevatedButton.styleFrom(
+    foregroundColor: Colors.white, backgroundColor: Colors.redAccent, // Text color
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(50.0),
+      side: BorderSide(color: Colors.blue, width: 2),
+    ),
+  ),
+  onPressed: () {
+    if (_formkey.currentState?.validate() ?? false) {
+      print("Successful");
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => AdminHome()),
+      );
+    } else {
+      print("Unsuccessful");
+    }
+  },
+  child: Text("Submit"),
+)
+
                 )
               ],
             ),

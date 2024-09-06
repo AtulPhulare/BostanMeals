@@ -27,6 +27,7 @@ class feedapp extends StatelessWidget {
                     subtitle:Text('${data[index]['comment']}'),
                     isThreeLine: true,
                   );
+                  return null;
                 },
               );
             }//else

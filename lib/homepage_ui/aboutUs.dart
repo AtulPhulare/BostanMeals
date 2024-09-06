@@ -150,12 +150,17 @@ class AboutPage extends StatelessWidget {
                   Container(
                     height: 20.0,
                   ),
-                  RaisedButton(
-                    onPressed: _makingPhoneCall,
-                    child: Text('Call'),
-                    textColor: Colors.black,
-                    padding: const EdgeInsets.all(5.0),
+                  ElevatedButton(
+                  onPressed: _makingPhoneCall,
+                  child: Text('Call'),
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.black, backgroundColor: Colors.grey[300], // Text color
+                    padding: const EdgeInsets.all(5.0), // Padding
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0), // Rounded corners (optional)
+                    ),
                   ),
+                )
                 ],
               ),
             ),

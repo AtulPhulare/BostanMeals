@@ -34,6 +34,7 @@ class Tandooriroti extends StatelessWidget {
               _valueSetter(products[index]);
             },
           );
+          return null;
         },
         separatorBuilder: (context, index){
           return Divider();

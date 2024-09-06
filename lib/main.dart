@@ -121,18 +121,16 @@ class _MyHomePageState extends State<MyHomePage> {
                       await _auth.createUserWithEmailAndPassword(
                           email: email, password: password);
 
-                      if (newuser != null) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => MyLoginPage()),
-                        );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MyLoginPage()),
+                      );
 
-                        setState(() {
-                          showProgress = false;
-                        });
-                      }
-                    } catch (e) {}
+                      setState(() {
+                        showProgress = false;
+                      });
+                                        } catch (e) {}
                   },
                   minWidth: 200.0,
                   height: 45.0,

@@ -3,7 +3,6 @@ import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:toast/toast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_app/homepage_ui/onlineordering/cart.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -116,18 +115,27 @@ class _HomeState extends State<Home> {
             ),
             SizedBox(height: 12,),
             // ignore: deprecated_member_use
-            RaisedButton(
-              color: Colors.blue,
-              child: Text("Pay Now", style: TextStyle(
-                  color: Colors.white
-              ),),
-              onPressed: (){
-                openCheckout();
-                Map <String,dynamic> data={"order":{"address":add,"phone":no}};
-                var firebaseUser =  FirebaseAuth.instance.currentUser;
-                firestoreInstance.collection("food_orders").doc(firebaseUser.tenantId).set(data);
-              },
-            )
+            ElevatedButton(
+            onPressed: () {
+              openCheckout();
+              Map<String, dynamic> data = {
+                "order": {
+                  "address": add,
+                  "phone": no,
+                }
+              };
+              var firebaseUser = FirebaseAuth.instance.currentUser;
+              firestoreInstance.collection("food_orders").doc(firebaseUser?.tenantId).set(data);
+            },
+            style: ElevatedButton.styleFrom(
+              foregroundColor: Colors.white, backgroundColor: Colors.blue, // Text color
+              padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0), // Padding
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.0), // Rounded corners
+              ),
+            ),
+            child: Text("Pay Now"),
+          )
           ],
         ),
       ),

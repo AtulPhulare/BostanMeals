@@ -113,33 +113,19 @@ class _MyLoginPageState extends State<MyLoginPage> {
                           email: email, password: password);
 
                       print(newUser.toString());
-                      if (newUser != null) {
-                        Fluttertoast.showToast(
-                            msg: "Login Successfull",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.CENTER,
-                            timeInSecForIosWeb: 1,
-                            backgroundColor: Colors.blueAccent,
-                            textColor: Colors.white,
-                            fontSize: 16.0);
-                        setState(() {
-                          showProgress = false;
-                        });
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePage()));
-                      }else{
-                        Fluttertoast.showToast(
-                            msg: "Login UnSuccessfull",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.CENTER,
-                            timeInSecForIosWeb: 1,
-                            backgroundColor: Colors.blueAccent,
-                            textColor: Colors.white,
-                            fontSize: 16.0);
-                        setState(() {
-                          showProgress = false;
-                        });
-                      }
-                    } catch (e) {}
+                      Fluttertoast.showToast(
+                          msg: "Login Successfull",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.blueAccent,
+                          textColor: Colors.white,
+                          fontSize: 16.0);
+                      setState(() {
+                        showProgress = false;
+                      });
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePage()));
+                                        } catch (e) {}
                   },
                   minWidth: 200.0,
                   height: 45.0,

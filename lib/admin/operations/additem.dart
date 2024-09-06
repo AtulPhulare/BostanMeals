@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 // ignore: camel_case_types
 class additem extends StatefulWidget {
@@ -46,15 +45,19 @@ class _HomeState extends State<additem> {
             ),
             SizedBox(height: 12,),
             // ignore: deprecated_member_use
-            RaisedButton(
-              color: Colors.blue,
-              child: Text("add", style: TextStyle(
-                  color: Colors.white
-              ),),
-              onPressed: () {
-                addUser();
-              }
-            )
+            ElevatedButton(
+            onPressed: () {
+              addUser();
+            },
+            style: ElevatedButton.styleFrom(
+              foregroundColor: Colors.white, backgroundColor: Colors.blue, // Text color
+              padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0), // Padding
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.0), // Rounded corners
+              ),
+            ),
+            child: Text("Add"),
+          )
           ],
         ),
       ),

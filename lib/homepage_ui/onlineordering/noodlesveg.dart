@@ -32,6 +32,7 @@ onTap: (){
 _valueSetter(products[index]);
 },
 );
+return null;
 },
 separatorBuilder: (context, index){
 return Divider();
