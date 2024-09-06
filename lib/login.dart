@@ -33,7 +33,7 @@ class MyLoginPage extends StatefulWidget {
 class _MyLoginPageState extends State<MyLoginPage> {
   final _auth = FirebaseAuth.instance;
   bool showProgress = false;
-  String email, password;
+  late String email, password;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -34,7 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final _auth = FirebaseAuth.instance;
   bool showProgress = false;
 
-  String email, password,name;
+  late String email, password,name;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -8,7 +8,7 @@ import 'viewfeedbacks.dart';
 import 'viewbookings.dart';
 class AdminHome extends StatelessWidget{
   Widget _buildSibgleContainer(
-      {IconData icon,int count,String name,BuildContext context}){
+      {required IconData icon,required int count,required String name,required BuildContext context}){
     return Card(
       child: Container(
         child: Column(

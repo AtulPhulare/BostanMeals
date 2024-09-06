@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'Main.dart';
+import 'HomePage.dart';
 void main() {
   runApp(MyApp());
 }
+
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -20,19 +20,17 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-InputDecoration buildInputDecoration(IconData icons,String hinttext) {
+
+InputDecoration buildInputDecoration(IconData icons, String hinttext) {
   return InputDecoration(
     hintText: hinttext,
     hintStyle: TextStyle(
       color: Colors.white,
     ),
-    prefixIcon: Icon(icons,color: Colors.white,),
+    prefixIcon: Icon(icons, color: Colors.white),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(25.0),
-      borderSide: BorderSide(
-          color: Colors.green,
-          width: 1.5
-      ),
+      borderSide: BorderSide(color: Colors.green, width: 1.5),
     ),
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(25.0),
@@ -41,7 +39,7 @@ InputDecoration buildInputDecoration(IconData icons,String hinttext) {
         width: 1.5,
       ),
     ),
-    enabledBorder:OutlineInputBorder(
+    enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(25.0),
       borderSide: BorderSide(
         color: Colors.blue,
@@ -50,26 +48,30 @@ InputDecoration buildInputDecoration(IconData icons,String hinttext) {
     ),
   );
 }
+
 class FormPage extends StatefulWidget {
   @override
   _FormPageState createState() => _FormPageState();
 }
+
 class _FormPageState extends State<FormPage> {
-  String name,address,phone,choice,tables;
+  late String name, address, phone, choice, tables;
   final firestoreInstance = FirebaseFirestore.instance;
-  final na=TextEditingController();
- final add=TextEditingController();
-  final no=TextEditingController();
-  final ch=TextEditingController();
-  final per=TextEditingController();
-  //TextController to read text entered in text field
+  final na = TextEditingController();
+  final add = TextEditingController();
+  final no = TextEditingController();
+  final ch = TextEditingController();
+  final per = TextEditingController();
+
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(iconTheme: IconThemeData(color: Colors.black),
+        appBar: AppBar(
+          iconTheme: IconThemeData(color: Colors.black),
           backgroundColor: Colors.white,
           elevation: 2.0,
           centerTitle: true,
@@ -82,8 +84,7 @@ class _FormPageState extends State<FormPage> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => HomePage()
-                ),
+                MaterialPageRoute(builder: (context) => HomePage()),
               );
             },
           ),
@@ -112,35 +113,35 @@ class _FormPageState extends State<FormPage> {
                       height: 15,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom:15,left: 10,right: 10),
+                      padding: const EdgeInsets.only(
+                          bottom: 15, left: 10, right: 10),
                       child: TextFormField(
                         controller: na,
                         keyboardType: TextInputType.text,
-                        decoration: buildInputDecoration(Icons.person,"Full Name"),
+                        decoration: buildInputDecoration(Icons.person, "Full Name"),
                         style: TextStyle(
                           color: Colors.white,
                         ),
-                        validator: (String value){
-                          if(value.isEmpty)
-                          {
+                        validator: (value) {
+                          if (value!.isEmpty) {
                             return 'Please Enter Name';
                           }
                           return null;
                         },
-                        onSaved: (String value){
-                          name = value;
+                        onSaved: ( value) {
+                          name = value!;
                         },
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 15,left: 10,right: 10),
+                      padding: const EdgeInsets.only(
+                          bottom: 15, left: 10, right: 10),
                       child: TextFormField(
                         controller: add,
                         keyboardType: TextInputType.text,
-                        decoration:buildInputDecoration(Icons.location_city,"Address"),
-                        validator: (String value){
-                          if(value.isEmpty)
-                          {
+                        decoration: buildInputDecoration(Icons.location_city, "Address"),
+                        validator: ( value) {
+                          if (value!.isEmpty) {
                             return 'Please Enter Your Address';
                           }
                           return null;
@@ -148,98 +149,112 @@ class _FormPageState extends State<FormPage> {
                         style: TextStyle(
                           color: Colors.white,
                         ),
-                        onSaved: (String value){
-                          address = value;
+                        onSaved: ( value) {
+                          address = value!;
                         },
                       ),
                     ),
                     Padding(
-
-                      padding: const EdgeInsets.only(bottom: 15,left: 10,right: 10),
+                      padding: const EdgeInsets.only(
+                          bottom: 15, left: 10, right: 10),
                       child: TextFormField(
                         controller: no,
-                        keyboardType: TextInputType.number,
-                        decoration:buildInputDecoration(Icons.phone,"Phone No"),
-                        validator: (String value){
-                          if(value.isEmpty)
-                          {
-                            return 'Please enter phone no ';
+                        keyboardType: TextInputType.phone,
+                        decoration: buildInputDecoration(Icons.phone, "Phone No"),
+                        validator: ( value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter phone number';
                           }
                           return null;
                         },
                         style: TextStyle(
                           color: Colors.white,
                         ),
-                        onSaved: (String value){
-                          phone = value;
+                        onSaved: ( value) {
+                          phone = value!;
                         },
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 15,left: 10,right: 10),
+                      padding: const EdgeInsets.only(
+                          bottom: 15, left: 10, right: 10),
                       child: TextFormField(
                         controller: ch,
                         keyboardType: TextInputType.text,
-                        decoration:buildInputDecoration(Icons.ac_unit,"AC OR Non-AC"),
-                        validator: (String value){
-                          if(value.isEmpty)
-                          {
-                            return 'Please a Enter Your Choice';
+                        decoration: buildInputDecoration(Icons.ac_unit, "AC OR Non-AC"),
+                        validator: ( value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter your choice';
                           }
                           return null;
                         },
                         style: TextStyle(
                           color: Colors.white,
                         ),
-                        onSaved: (String value) {
-                          choice = value;
+                        onSaved: ( value) {
+                          choice = value!;
                         },
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 15,left: 10,right: 10),
+                      padding: const EdgeInsets.only(
+                          bottom: 15, left: 10, right: 10),
                       child: TextFormField(
                         controller: per,
                         keyboardType: TextInputType.number,
-                        decoration:buildInputDecoration(Icons.person,"Number of Persons"),
-                        validator: (String value){
-                          if(value.isEmpty)
-                          {
-                            return 'Please Enter Number of Persons';
+                        decoration: buildInputDecoration(Icons.person, "Number of Persons"),
+                        validator: ( value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter number of persons';
                           }
                           return null;
                         },
                         style: TextStyle(
                           color: Colors.white,
                         ),
-                        onSaved: (String value) {
-                          tables = value;
+                        onSaved: ( value) {
+                          tables = value!;
                         },
                       ),
                     ),
                     SizedBox(
                       width: 200,
                       height: 50,
-                      // ignore: deprecated_member_use
-                      child: RaisedButton(
-                        color: Colors.redAccent,
-                        onPressed: (){
-                          if(_formkey.currentState.validate())
-                          {
-                            print("successful");
-                            Map <String,dynamic> data={"name":na.text,"address":add.text,"phone":no.text as int,"choice":ch.text,"persons":per.text as int};
-                            var firebaseUser =  FirebaseAuth.instance.currentUser;
-                            firestoreInstance.collection("Table_booking").doc(firebaseUser.uid).set(data);
-                            return;
-                          }else{
-                            print("UnSuccessfull");
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.redAccent,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50.0),
+                            side: BorderSide(color: Colors.blue, width: 2),
+                          ),
+                        ),
+                        onPressed: () async {
+                          if (_formkey.currentState!.validate()) {
+                            var firebaseUser = FirebaseAuth.instance.currentUser;
+                            if (firebaseUser != null) {
+                              Map<String, dynamic> data = {
+                                "name": na.text,
+                                "address": add.text,
+                                "phone": int.tryParse(no.text), // Convert to int
+                                "choice": ch.text,
+                                "persons": int.tryParse(per.text) // Convert to int
+                              };
+                              await firestoreInstance
+                                  .collection("Table_booking")
+                                  .doc(firebaseUser.uid)
+                                  .set(data);
+                              print("Booking successful");
+                            } else {
+                              print("User not logged in");
+                            }
+                          } else {
+                            print("Unsuccessful");
                           }
                         },
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50.0),
-                            side: BorderSide(color: Colors.blue,width: 2)
+                        child: Text(
+                          "Book Table",
+                          style: TextStyle(color: Colors.white),
                         ),
-                        textColor:Colors.white,child: Text("Book Table"),
                       ),
                     )
                   ],

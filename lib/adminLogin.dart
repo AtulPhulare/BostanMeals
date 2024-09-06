@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 //import 'package:flutter/services.dart';
-import 'file:///C:/Users/user/AndroidStudioProjects/flutter_app/lib/admin/admin.dart';
+import 'admin/admin.dart';
 
 
 void main() {
@@ -96,7 +96,7 @@ class _LoginDemoState extends State<LoginDemo> {
                 controller: passwordController,
               ),
             ),
-            FlatButton(
+            TextButton(
               onPressed: (){
                 //TODO FORGOT PASSWORD SCREEN GOES HERE
               },

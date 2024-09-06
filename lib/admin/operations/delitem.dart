@@ -37,8 +37,8 @@ class _HomeState extends State<delitem> {
             ),
             SizedBox(height: 12,),
             // ignore: deprecated_member_use
-            RaisedButton(
-                color: Colors.blue,
+            ElevatedButton(
+                //color: Colors.blue,
                 child: Text("Remove", style: TextStyle(
                     color: Colors.white
                 ),),

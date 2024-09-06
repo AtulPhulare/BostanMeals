@@ -17,13 +17,13 @@ class feedapp extends StatelessWidget {
             if (Querysnapshot.connectionState == ConnectionState.waiting) {
               return CircularProgressIndicator();
             } else {
-              final data=Querysnapshot.data.docs;
+              final data=Querysnapshot.data?.docs;
               return ListView.builder(
-                itemCount: data.length,
+                itemCount: data?.length,
                 itemBuilder: (context, index) {
                   return ListTile(
                     leading: Icon(Icons.feedback),
-                    title: Text('${data[index]['phone']}'),
+                    title: Text('${data![index]['phone']}'),
                     subtitle:Text('${data[index]['comment']}'),
                     isThreeLine: true,
                   );

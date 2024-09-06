@@ -46,8 +46,8 @@ class _HomeState extends State<additem> {
             ),
             SizedBox(height: 12,),
             // ignore: deprecated_member_use
-            RaisedButton(
-              color: Colors.blue,
+            ElevatedButton(
+              //color: Colors.blue,
               child: Text("add", style: TextStyle(
                   color: Colors.white
               ),),

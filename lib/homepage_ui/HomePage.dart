@@ -30,7 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
           icon: Icon(
             Icons.arrow_back,
             size: 27,
-          ),
+          ), onPressed: () {  },
         ),
         actions: [
           IconButton(
@@ -38,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Icons.search,
               size: 27,
               color: Colors.grey,
-            ),
+            ), onPressed: () {  },
           )
         ],
       ),
@@ -394,7 +394,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Icons.fastfood_rounded,
                 size: 27,
                 color: Colors.grey,
-              ),
+              ), onPressed: () {  },
             )
         ),
         Expanded(

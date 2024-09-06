@@ -52,7 +52,7 @@ class FormPage extends StatefulWidget {
   _FormPageState createState() => _FormPageState();
 }
 class _FormPageState extends State<FormPage> {
-  String name,email,phone;
+  late String name,email,phone;
   //TextController to read text entered in text field
   TextEditingController password = TextEditingController();
   TextEditingController confirmpassword = TextEditingController();
@@ -99,8 +99,8 @@ class _FormPageState extends State<FormPage> {
                   child: TextFormField(
                     keyboardType: TextInputType.text,
                     decoration:buildInputDecoration(Icons.email,"Email"),
-                    validator: (String value){
-                      if(value.isEmpty)
+                    validator: ( value){
+                      if(value!.isEmpty)
                       {
                         return 'Please a Enter';
                       }
@@ -109,8 +109,8 @@ class _FormPageState extends State<FormPage> {
                       }
                       return null;
                     },
-                    onSaved: (String value){
-                      email = value;
+                    onSaved: ( value){
+                      email = value!;
                     },
                   ),
                 ),
@@ -121,8 +121,8 @@ class _FormPageState extends State<FormPage> {
                     controller: password,
                     keyboardType: TextInputType.text,
                     decoration:buildInputDecoration(Icons.lock,"Password"),
-                    validator: (String value){
-                      if(value.isEmpty)
+                    validator: ( value){
+                      if(value!.isEmpty)
                       {
                         return 'Please a Enter Password';
                       }
@@ -140,8 +140,8 @@ class _FormPageState extends State<FormPage> {
                     obscureText: true,
                     keyboardType: TextInputType.text,
                     decoration:buildInputDecoration(Icons.lock,"Confirm Password"),
-                    validator: (String value){
-                      if(value.isEmpty)
+                    validator: ( value){
+                      if(value!.isEmpty)
                       {
                         return 'Please re-enter password';
                       }
@@ -156,23 +156,29 @@ class _FormPageState extends State<FormPage> {
                   width: 200,
                   height: 50,
                   // ignore: deprecated_member_use
-                  child: RaisedButton(
-                    color: Colors.redAccent,
-                    onPressed: (){
-                      if(_formkey.currentState.validate())
-                      {
-                        print("successful");
-                        return  Navigator.push(context, MaterialPageRoute(builder: (context)=> AdminHome()));
-                      }else{
-                        print("UnSuccessfull");
-                      }
-                    },
+                  child: ElevatedButton(
+                  onPressed: () {
+                    if (_formkey.currentState!.validate()) {
+                      print("successful");
+                       Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => AdminHome()),
+                      );
+                    } else {
+                      print("Unsuccessful");
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.redAccent, // Background color
+                    onPrimary: Colors.white,   // Text color
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50.0),
-                        side: BorderSide(color: Colors.blue,width: 2)
+                      borderRadius: BorderRadius.circular(50.0),
+                      side: BorderSide(color: Colors.blue, width: 2),
                     ),
-                    textColor:Colors.white,child: Text("Submit"),
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   ),
+                  child: Text("Submit"),
+                ),
                 )
               ],
             ),

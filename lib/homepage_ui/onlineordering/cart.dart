@@ -40,7 +40,7 @@ class CartApp extends StatefulWidget {
 class _CartAppState extends State<CartApp> {
   List<ProductModel> cart = [];
   // ignore: deprecated_member_use
-  var arr =new List();
+  var arr =[];
   int sum = 0;
   final firestoreInstance = FirebaseFirestore.instance;
   @override
@@ -416,7 +416,7 @@ class _CartAppState extends State<CartApp> {
             onPressed: () {
               Map <String,dynamic> data={"total":sum,"items":arr};
             var firebaseUser =  FirebaseAuth.instance.currentUser;
-            firestoreInstance.collection("food_orders").doc(firebaseUser.uid).set(data);
+            firestoreInstance.collection("food_orders").doc(firebaseUser!.uid).set(data);
               Navigator.push(context, MaterialPageRoute(builder: (context)=> pay()));
             },
           ),

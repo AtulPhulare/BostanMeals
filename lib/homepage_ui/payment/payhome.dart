@@ -12,7 +12,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final firestoreInstance = FirebaseFirestore.instance;
-  Razorpay razorpay;
+  late Razorpay razorpay;
   TextEditingController textEditingController = new TextEditingController();
   TextEditingController add=new TextEditingController();
   TextEditingController no=new TextEditingController();
@@ -116,8 +116,7 @@ class _HomeState extends State<Home> {
             ),
             SizedBox(height: 12,),
             // ignore: deprecated_member_use
-            RaisedButton(
-              color: Colors.blue,
+            ElevatedButton(
               child: Text("Pay Now", style: TextStyle(
                   color: Colors.white
               ),),
@@ -125,7 +124,7 @@ class _HomeState extends State<Home> {
                 openCheckout();
                 Map <String,dynamic> data={"order":{"address":add,"phone":no}};
                 var firebaseUser =  FirebaseAuth.instance.currentUser;
-                firestoreInstance.collection("food_orders").doc(firebaseUser.tenantId).set(data);
+                firestoreInstance.collection("food_orders").doc(firebaseUser!.tenantId).set(data);
               },
             )
           ],

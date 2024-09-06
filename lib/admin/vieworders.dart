@@ -17,13 +17,13 @@ class orapp extends StatelessWidget {
             if (Querysnapshot.connectionState == ConnectionState.waiting) {
               return CircularProgressIndicator();
             } else {
-              final data=Querysnapshot.data.docs;
+              final data=Querysnapshot.data?.docs;
               return ListView.builder(
-                itemCount: data.length,
+                itemCount: data?.length,
                 itemBuilder: (context, index) {
                   return ListTile(
                     leading: Icon(Icons.feedback),
-                    title: Text('${data[index]['total']}'),
+                    title: Text('${data![index]['total']}'),
                     subtitle: Text('${data[index]['items']}'),
                     isThreeLine: true,
                   );

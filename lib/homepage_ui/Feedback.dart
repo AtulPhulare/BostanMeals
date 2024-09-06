@@ -53,19 +53,19 @@ class _FeedbackState extends State<Feedback1> {
             Row(
               children: [
                 // ignore: deprecated_member_use
-                FlatButton(
+                TextButton(
                   onPressed: () {
                     Map <String,dynamic> data={"phone":phone.text,"comment":comment.text};
                     var firebaseUser =  FirebaseAuth.instance.currentUser;
-                    firestoreInstance.collection("feedback").doc(firebaseUser.uid).set(data);
+                    firestoreInstance.collection("feedback").doc(firebaseUser!.uid).set(data);
                   },
                   child: Text(
                     "SUBMIT",
                     style: TextStyle(
                         color: Colors.blue, fontWeight: FontWeight.bold),
                   ),
-                  color: Color(0xFFE5E5E5),
-                  padding: EdgeInsets.all(16.0),
+                  // color: Color(0xFFE5E5E5),
+                  // padding: EdgeInsets.all(16.0),
                 ),
               ],
             )
