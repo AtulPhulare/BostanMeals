@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'login.dart';
@@ -42,9 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text("user registration"),
       ),
       body: Center(
-        child: ModalProgressHUD(
-          inAsyncCall: showProgress,
-          child: Column(
+        child:Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Container(margin:EdgeInsets.all(25),
@@ -162,7 +159,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
         ),
-      ),
     );
   }
 }

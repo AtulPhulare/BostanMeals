@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
-import 'package:toast/toast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_app/homepage_ui/onlineordering/cart.dart';
@@ -60,17 +59,35 @@ class _HomeState extends State<Home> {
 
   void handlerPaymentSuccess(){
     print("Payment success");
-    Toast.show("Payment success", context);
+    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text("Payment Success"),
+                        backgroundColor: Colors.blue,
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
   }
 
   void handlerErrorFailure(){
     print("Payment error");
-    Toast.show("Payment error", context);
+    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text("Payment Error"),
+                        backgroundColor: Colors.red,
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
   }
 
   void handlerExternalWallet(){
     print("External Wallet");
-    Toast.show("External Wallet", context);
+    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text("External Wallet"),
+                        backgroundColor: Colors.blue,
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
   }
 
   @override

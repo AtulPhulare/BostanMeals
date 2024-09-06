@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_app/homepage_ui/main.dart';
 void main() async{
@@ -41,9 +39,7 @@ class _MyLoginPageState extends State<MyLoginPage> {
         title: Text("Firebase Authentication"),
       ),
       body: Center(
-        child: ModalProgressHUD(
-          inAsyncCall: showProgress,
-          child: Column(
+        child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
@@ -100,60 +96,70 @@ class _MyLoginPageState extends State<MyLoginPage> {
                 height: 20.0,
               ),
               Material(
-                elevation: 5,
-                color: Colors.lightBlue,
-                borderRadius: BorderRadius.circular(32.0),
-                child: MaterialButton(
-                  onPressed: () async {
-                    setState(() {
-                      showProgress = true;
-                    });
-                    try {
-                      var newUser = await _auth.signInWithEmailAndPassword(
-                          email: email, password: password);
+              elevation: 5,
+              color: Colors.lightBlue,
+              borderRadius: BorderRadius.circular(32.0),
+              child: MaterialButton(
+                onPressed: () async {
+                  setState(() {
+                    showProgress = true;
+                  });
+                  try {
+                    var newUser = await _auth.signInWithEmailAndPassword(
+                        email: email, password: password);
 
-                      print(newUser.toString());
-                      if (newUser != null) {
-                        Fluttertoast.showToast(
-                            msg: "Login Successfull",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.CENTER,
-                            timeInSecForIosWeb: 1,
-                            backgroundColor: Colors.blueAccent,
-                            textColor: Colors.white,
-                            fontSize: 16.0);
-                        setState(() {
-                          showProgress = false;
-                        });
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePage()));
-                      }else{
-                        Fluttertoast.showToast(
-                            msg: "Login UnSuccessfull",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.CENTER,
-                            timeInSecForIosWeb: 1,
-                            backgroundColor: Colors.blueAccent,
-                            textColor: Colors.white,
-                            fontSize: 16.0);
-                        setState(() {
-                          showProgress = false;
-                        });
-                      }
-                    } catch (e) {}
-                  },
-                  minWidth: 200.0,
-                  height: 45.0,
-                  child: Text(
-                    "Login",
-                    style:
-                    TextStyle(fontWeight: FontWeight.w500, fontSize: 20.0),
-                  ),
+                    print(newUser.toString());
+                    if (newUser != null) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text("Login Successful"),
+                          backgroundColor: Colors.green,
+                          duration: Duration(seconds: 2),
+                        ),
+                      );
+                      setState(() {
+                        showProgress = false;
+                      });
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomePage()),
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text("Login Unsuccessful"),
+                          backgroundColor: Colors.red,
+                          duration: Duration(seconds: 2),
+                        ),
+                      );
+                      setState(() {
+                        showProgress = false;
+                      });
+                    }
+                  } catch (e) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text("Error: ${e.toString()}"),
+                        backgroundColor: Colors.red,
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                    setState(() {
+                      showProgress = false;
+                    });
+                  }
+                },
+                minWidth: 200.0,
+                height: 45.0,
+                child: Text(
+                  "Login",
+                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20.0),
                 ),
-              )
+              ),
+            )
             ],
           ),
         ),
-      ),
-    );
+      );
   }
 }
